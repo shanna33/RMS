@@ -1,0 +1,239 @@
+Part 1: Setting Up the System
+
+BEGIN
+
+    // Files used to store data
+    CREATE a file called "admin.txt" to store admin usernames and passwords.
+    CREATE a file called "staff.txt" to store details of staff members.
+    CREATE a file called "sales.txt" to keep track of sales records.
+    CREATE a file called "feedback.txt" to store customer feedback.
+
+END
+
+
+Part2:Admin Account Setup
+FUNCTION initialize_admin()
+    
+    DISPLAY "Enter a username for the admin account: "
+    GET input from the user and STORE it as 'username'.
+    
+    DISPLAY "Enter a password for the admin account: "
+    GET input from the user and STORE it as 'password'.
+
+    // Check if the admin file already exists; if not, create it.
+    IF "admin.txt" does not exist THEN
+        CREATE "admin.txt".
+
+    // Read existing admin accounts
+    OPEN "admin.txt" and READ all lines.
+    STORE them in a list called 'existing_admins'.
+    CLOSE the file.
+
+    // Check if the username already exists
+    FOR EACH line in 'existing_admins'
+        EXTRACT the username from the line.
+        IF it matches 'username' THEN
+            DISPLAY "This username is already taken. Try another one."
+            RETURN.
+
+    // Store the new admin details
+    OPEN "admin.txt" in APPEND mode.
+    ADD 'username : password' to the file.
+    CLOSE the file.
+
+    DISPLAY "Admin account created successfully!"
+
+END FUNCTION
+
+
+
+
+PART 3: Adding Staff Members
+FUNCTION add_staff()
+
+    DISPLAY "Enter the staff role (Manager or Chef): "
+    GET input from the user and STORE it as 'role'.
+    
+    CONVERT 'role' to capitalized format.
+
+    // Ensure the role is valid
+    IF 'role' is neither "Manager" nor "Chef" THEN
+        DISPLAY "Invalid role. Please enter either 'Manager' or 'Chef'."
+        RETURN.
+
+    DISPLAY "Enter the name of the " + role + ": "
+    GET input from the user and STORE it as 'staff_name'.
+
+    // Save the staff details in the staff file
+    OPEN "staff.txt" in APPEND mode.
+    ADD 'role : staff_name' to the file.
+    CLOSE the file.
+
+    DISPLAY role + " " + staff_name + " has been successfully added."
+
+END FUNCTION
+
+
+
+
+
+
+
+
+PART 4: Viewing Sales Reports
+FUNCTION view_sales_report()
+
+    // Check if any sales reports exist
+    IF "sales.txt" does not exist THEN
+        DISPLAY "No sales reports are available."
+        RETURN.
+
+    // Read sales data
+    OPEN "sales.txt" and READ all lines.
+    STORE them in a list called 'sales_data'.
+    CLOSE the file.
+
+    // If no data is found
+    IF 'sales_data' is empty THEN
+        DISPLAY "No sales data found."
+    ELSE
+        DISPLAY "Sales Report:"
+        DISPLAY "Month | Chef | Total Sales | Items Sold"
+        DISPLAY "--------------------------------------"
+
+        FOR EACH line in 'sales_data'
+            DISPLAY the line.
+
+END FUNCTION
+
+
+
+
+PART 5: Adding Sales Reports
+FUNCTION add_sales_report()
+
+    DISPLAY "Enter the sales report month (e.g., January, February): "
+    GET input from the user and STORE it as 'month'.
+
+    DISPLAY "Enter the name of the chef responsible for this report: "
+    GET input from the user and STORE it as 'chef_name'.
+
+    DISPLAY "Enter the total sales amount: "
+    GET input from the user and STORE it as 'total_sales'.
+
+    DISPLAY "Enter the number of items sold: "
+    GET input from the user and STORE it as 'items_sold'.
+
+    // Save the new sales report
+    OPEN "sales.txt" in APPEND mode.
+    ADD 'month | chef_name | total_sales | items_sold' to the file.
+    CLOSE the file.
+
+    DISPLAY "Sales report has been recorded successfully!"
+
+END FUNCTION
+
+
+
+
+
+
+PART 6: Exporting Sales Reports
+FUNCTION export_sales_report()
+
+    // Check if sales reports exist
+    IF "sales.txt" does not exist THEN
+        DISPLAY "No sales reports available for export."
+        RETURN.
+
+    // Read existing sales report data
+    OPEN "sales.txt" and READ all lines.
+    STORE them in 'sales_data'.
+    CLOSE the file.
+
+    // Save sales data to a new file
+    OPEN "exported_sales_report.txt" in WRITE mode.
+    WRITE 'sales_data' into this new file.
+    CLOSE the file.
+
+    DISPLAY "Sales report successfully exported!"
+
+END FUNCTION
+
+
+
+
+
+
+PART 7: Managing Sales Reports
+FUNCTION sales_menu()
+
+    WHILE true
+        DISPLAY "SALES MANAGEMENT MENU:"
+        DISPLAY "1. Add a Sales Report"
+        DISPLAY "2. View Sales Reports"
+        DISPLAY "3. Export Sales Reports"
+        DISPLAY "4. Return to Main Menu"
+
+        DISPLAY "Enter your choice: "
+        GET input from the user and STORE it as 'choice'.
+
+        IF 'choice' is "1" THEN
+            CALL add_sales_report().
+        ELSE IF 'choice' is "2" THEN
+            CALL view_sales_report().
+        ELSE IF 'choice' is "3" THEN
+            CALL export_sales_report().
+        ELSE IF 'choice' is "4" THEN
+            BREAK.
+        ELSE
+            DISPLAY "Invalid choice. Try again."
+
+END FUNCTION
+
+
+
+
+
+PART 8: Admin Login & Main Menu
+FUNCTION main_menu()
+    SET 'attempts' to 3.
+    WHILE 'attempts' > 0
+        DISPLAY "Enter Admin Username: "
+        GET input from the user and STORE it as 'admin_username'.
+        DISPLAY "Enter Admin Password: "
+        GET input from the user and STORE it as 'admin_password'.
+        // Check if the admin file exists
+        IF "admin.txt" does not exist THEN
+            DISPLAY "No admin account found. Please set one up first."
+            RETURN.
+        OPEN "admin.txt" and READ all lines.
+        STORE them in 'admin_data'.
+        CLOSE the file.
+        FOR EACH line in 'admin_data'
+            EXTRACT 'stored_username' and 'stored_password'.
+            IF 'admin_username' matches 'stored_username' AND 'admin_password' matches 'stored_password' THEN
+                DISPLAY "Login successful!"
+                WHILE true
+                    DISPLAY "ADMIN MENU:"
+                    DISPLAY "1. Update Admin Profile"
+                    DISPLAY "2. Manage Staff"
+                    DISPLAY "3. Manage Sales Reports"
+                    DISPLAY "4. Exit"
+                    DISPLAY "Enter your choice: "
+                    GET input from the user and STORE it as 'choice'.
+                    IF 'choice' is "1" THEN
+                        CALL initialize_admin().
+                    ELSE IF 'choice' is "2" THEN
+                        CALL add_staff().
+                    ELSE IF 'choice' is "3" THEN
+                        CALL sales_menu().
+                    ELSE IF 'choice' is "4" THEN
+                        DISPLAY "Goodbye!"
+                        RETURN.
+                    ELSE
+                        DISPLAY "Invalid choice. Try again."
+        DISPLAY "Incorrect login details."
+        DECREASE 'attempts' by 1.
+    DISPLAY "Too many failed attempts. Exiting."
+END FUNCTION

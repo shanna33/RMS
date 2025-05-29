@@ -1,0 +1,3 @@
+Order: Burger, Pizza, Total: RM32
+Order: Pasta, Soda, Total: RM20
+Order: Salad, Soda, Total: RM15

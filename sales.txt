@@ -1,0 +1,3 @@
+January | Chef John | 5000 | 120
+February | Chef Emily | 6200 | 150
+March | Chef Alex | 4700 | 100

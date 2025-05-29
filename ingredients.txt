@@ -1,0 +1,6 @@
+0, salt, 20
+salt, 20 gram
+yeast, 275 gram
+oil, 30 gram
+pani puri, 20
+cheese, 20

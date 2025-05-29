@@ -1,0 +1,84 @@
+Pseudocode:
+START
+    FUNCTION manager()
+        WHILE TRUE
+            DISPLAY "1. Manage Customers"
+            DISPLAY "2. Manage Menu"
+            DISPLAY "3. View Ingredients"
+            DISPLAY "4. Update Profile"
+            DISPLAY "5. Exit"
+            INPUT choice
+            IF choice == "1" THEN manage_customer()
+            ELSE IF choice == "2" THEN manage_menu()
+            ELSE IF choice == "3" THEN view_ingredient()
+            ELSE IF choice == "4" THEN update_profile()
+            ELSE IF choice == "5" THEN EXIT
+            ELSE DISPLAY "Invalid choice"
+    FUNCTION manage_customer()
+        WHILE TRUE
+             DISPLAY "1. Add Customer"
+            DISPLAY "2. Delete Customer"
+            DISPLAY "3. Edit Customer"
+            DISPLAY "4. Back"
+            INPUT choice
+            IF choice == "1" THEN add_customer()
+            ELSE IF choice == "2" THEN delete_customer()
+            ELSE IF choice == "3" THEN edit_customer()
+            ELSE IF choice == "4" THEN EXIT
+            ELSE DISPLAY "Invalid choice"
+    FUNCTION add_customer()
+        INPUT name, email, phone
+        APPEND name, email, phone TO "customer.txt"
+        DISPLAY "Customer added"
+    FUNCTION delete_customer()
+        INPUT customer_name
+        READ "customer.txt"
+        REMOVE line that starts with customer_name
+        WRITE updated data to "customer.txt"
+        DISPLAY "Customer deleted"
+    FUNCTION edit_customer()
+        INPUT customer_name
+        READ "customer.txt"
+        REMOVE line that starts with customer_name
+        INPUT new_name, new_email, new_phone
+        APPEND new_name, new_email, new_phone TO "customer.txt"
+        DISPLAY "Customer updated"
+    FUNCTION manage_menu()
+        WHILE TRUE
+            DISPLAY "1. Add Menu Item"
+            DISPLAY "2. Edit Menu Item"
+            DISPLAY "3. Delete Menu Item"
+            DISPLAY "4. Back"
+            INPUT choice
+            IF choice == "1" THEN add_menu()
+            ELSE IF choice == "2" THEN edit_menu()
+            ELSE IF choice == "3" THEN delete_menu()
+            ELSE IF choice == "4" THEN EXIT
+            ELSE DISPLAY "Invalid choice"
+    FUNCTION add_menu()
+        INPUT item_name, category, price
+        APPEND item_name, category, price TO "menu.txt"
+        DISPLAY "Menu item added"
+    FUNCTION edit_menu()
+        INPUT menu_item_name
+        READ "menu.txt"
+        REMOVE line that starts with menu_item_name
+        INPUT new_name, new_category, new_price
+        APPEND new_name, new_category, new_price TO "menu.txt"
+        DISPLAY "Menu item updated"
+    FUNCTION delete_menu()
+        INPUT menu_item_name
+        READ "menu.txt"
+        REMOVE line that starts with menu_item_name
+        WRITE updated data to "menu.txt"
+        DISPLAY "Menu item deleted"
+    FUNCTION view_ingredient()
+        DISPLAY "Menu Items:"
+        READ "menu.txt"
+        DISPLAY contents
+    FUNCTION update_profile()
+        INPUT name, email, phone
+        WRITE name, email, phone TO "profile.txt"
+        DISPLAY "Profile updated"
+    CALL manager()  // Start program
+END 

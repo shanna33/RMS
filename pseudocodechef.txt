@@ -1,0 +1,67 @@
+START
+
+Create files if they don’t exist.
+
+SHOW menu options:
+    1. View Orders
+    2. Update Order Status
+    3. Manage Ingredients
+    4. Update Profile
+    5. Logout
+
+IF user chooses "View Orders":
+    Open the orders file
+    IF there are orders:
+        Show each order
+    ELSE:
+        Say "No orders available"
+
+IF user chooses "Update Order Status":
+    Ask for order ID and new status
+    Find the order in the file
+    IF found:
+        Update the status
+        Save changes
+        Say "Order updated"
+    ELSE:
+        Say "Order not found"
+
+IF user chooses "Manage Ingredients":
+    SHOW ingredient options:
+        1. Add Ingredient
+        2. Edit Ingredient
+        3. Delete Ingredient
+    
+    IF "Add":
+        Ask for ingredient name and quantity
+        Save it to the file
+        Say "Ingredient added"
+    
+    IF "Edit":
+        Ask for ingredient name
+        Find it in the file
+        IF found:
+            Ask what to change (name or quantity)
+            Update and save
+            Say "Ingredient updated"
+        ELSE:
+            Say "Ingredient not found"
+    
+    IF "Delete":
+        Ask for ingredient name
+        Find and remove it from the file
+        Save changes
+        Say "Ingredient deleted" or "Ingredient not found"
+
+IF user chooses "Update Profile":
+    Ask for name and contact number
+    Save to profile file
+    Say "Profile updated"
+
+IF user chooses "Logout":
+    Say "Goodbye"
+    STOP
+
+GO BACK to menu after each task.
+
+END

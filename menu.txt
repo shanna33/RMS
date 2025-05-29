@@ -1,0 +1,4 @@
+momo,veg,30.0
+salad,2,4.0
+pizza,gji,788.0
+Pasta,fogi,4568.0

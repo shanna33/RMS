@@ -1,0 +1,28 @@
+START
+	LOAD customer profile
+	LOAD previous orders
+	LOAD feedback
+
+	FUNCTION display_menu()
+		SHOW menu items and prices
+
+	FUNCTION order_food()
+		WHILE user selects food
+			IF valid item THEN ADD to orders
+		SAVE orders
+
+FUNCTION view_order()
+	IF orders exist THEN SHOW order details
+FUNCTION confirm_payment()
+	IF orders exist THEN
+		SHOW order summary
+		IF user confirms THEN MARK as PAID
+FUNCTION send_feedback()
+	GET user input
+	SAVE feedback
+FUNCTION customer_menu()
+	LOOP:SHOW options & CALL corresponding functions
+	EXIT on logout
+PRINT “Customer Logged in Successfully!”
+CALL customer_menu()
+END
